@@ -82,15 +82,23 @@ apiKey
 
 ### 1. Loading Timeseries
 
-The first step is to load your raw data into memory. Continuing the Uber example from above, say we want to detect anomalies in a `trips` metric that might indicate an outage. As a proxy for the `trips` metrics we'll use a dataset of the number of NYC taxi passengers released by the NYC Taxi and Limousine Commission. The data here consists of aggregating the total number of taxi passengers into 30 minute buckets.
+The first step is to load your raw data into memory.
+
+Your raw data should be in a csv file format with two columns: ```ds``` and ```y```, containing the date and numeric value respectively. The ```ds``` column should be ```YYYY-MM-DD``` for a date, or ```YYYY-MM-DD HH:MM:SS``` for a timestamp.
+
+As our case study in this guide, we would like to forecast the number of Wikimedia pageviews for observability purposes -- if the number of pageviews is ever much lower than expected, this might indicate a softare outage.
+
+We have three years worth of Wikimedia data at a daily granularity: 
+
+<!-- Continuing the Uber example from above, say we want to detect anomalies in a `trips` metric that might indicate an outage. As a proxy for the `trips` metrics we'll use a dataset of the number of NYC taxi passengers released by the NYC Taxi and Limousine Commission. The data here consists of aggregating the total number of taxi passengers into 30 minute buckets. -->
 
 This is what the first couple rows of the csv looks like:
 
-| timestamp           | value |
+| ds           | y |
 | ------------------- | ----- |
-| 2014-07-01 00:00:00 | 10844 |
-| 2014-07-01 00:30:00 | 8127  |
-| 2014-07-01 01:00:00 | 6210  |
+| 2018-01-01 | 302828330 |
+| 2018-01-02 | 319485738 |
+| 2018-01-03 | 322019675 |
 
 ![NYC Taxi Passengers](nyc_taxi_pre_forecast.png)
 
